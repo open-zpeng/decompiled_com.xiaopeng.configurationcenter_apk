@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="150" android:versionName="V1.6.0_20230724112436_Release-D55" android:compileSdkVersion="28" android:compileSdkVersionCodename="9" package="com.xiaopeng.configurationcenter" platformBuildVersionCode="28" platformBuildVersionName="9">
+    <uses-sdk android:minSdkVersion="26" android:targetSdkVersion="28"/>
+    <permission android:name="com.xiaopeng.permission.READ_CONFIGURATION" android:protectionLevel="signature"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="com.xiaopeng.permission.SYSTEM_DELEGATE"/>
+    <uses-permission android:name="com.xiaopeng.permission.SERVICE"/>
+    <uses-permission android:name="com.xiaopeng.permission.BROADCAST"/>
+    <uses-permission android:name="com.xiaopeng.permission.IPC"/>
+    <uses-permission android:name="xiaopeng.permission.DATA_SERVICE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="com.xiaopeng.permission.DATA_SERVICE"/>
+    <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS_FULL"/>
+    <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS"/>
+    <uses-permission android:name="android.permission.GET_TASKS"/>
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.READ_SMS"/>
+    <uses-permission android:name="com.xiaopeng.permission.READ_CONFIGURATION"/>
+    <uses-permission android:name="android.permission.REORDER_TASKS"/>
+    <application android:theme="@style/AppTheme" android:label="@string/app_name" android:icon="@mipmap/ic_launcher" android:name="com.xiaopeng.configurationcenter.App" android:debuggable="true" android:allowBackup="true" android:supportsRtl="true" android:extractNativeLibs="false" android:usesCleartextTraffic="true" android:roundIcon="@mipmap/ic_launcher_round" android:appComponentFactory="androidx.core.app.CoreComponentFactory">
+        <activity android:name="com.xiaopeng.configurationcenter.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <service android:name="com.xiaopeng.configurationcenter.ConfigurationService"/>
+        <service android:name="com.xiaopeng.configurationcenter.connector.RemoteService" android:permission="@string/permission">
+            <intent-filter>
+                <action android:name="com.xiaopeng.configurationcenter.connector.RemoteService.CONNECT"/>
+            </intent-filter>
+        </service>
+        <service android:name="com.xiaopeng.lib.framework.ipcmodule.AgentService" android:permission="com.xiaopeng.permission.SERVICE" android:enabled="true" android:exported="true">
+            <intent-filter>
+                <action android:name="com.xiaopeng.ipc.AgentService"/>
+            </intent-filter>
+        </service>
+        <receiver android:name="com.xiaopeng.configurationcenter.Receiver" android:permission="com.xiaopeng.permission.BROADCAST">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+                <action android:name="com.xiaopeng.broadcast.ACTION_PM_STATUS_CHANGE"/>
+            </intent-filter>
+        </receiver>
+        <service android:name="org.eclipse.paho.android.service.MqttService"/>
+        <provider android:name="com.xiaopeng.lib.framework.netchannelmodule.common.ContextNetStatusProvider" android:exported="false" android:authorities="com.xiaopeng.configurationcenter.netmodule.provider"/>
+        <provider android:name="com.xiaopeng.lib.apirouter.server.ApiPublisherProvider" android:exported="true" android:authorities="com.xiaopeng.configurationcenter.api.publisher"/>
+        <service android:name="androidx.room.MultiInstanceInvalidationService" android:exported="false"/>
+    </application>
+</manifest>
